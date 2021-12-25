@@ -212,7 +212,7 @@ export default defineComponent({
         label: "UTR",
         align: "center",
         field: (row) => row.urt,
-        format: (val) => `${val}`,
+        format: (val) => val || '',
       },
       {
         name: "amount",
