@@ -208,6 +208,13 @@ export default defineComponent({
         format: (val) => `${val}`,
       },
       {
+        name: "urt",
+        label: "UTR",
+        align: "center",
+        field: (row) => row.urt,
+        format: (val) => `${val}`,
+      },
+      {
         name: "amount",
         label: $t("payoutOrder.amount"),
         align: "center",

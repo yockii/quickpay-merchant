@@ -7,14 +7,14 @@
           {{ merchant.name }}
         </q-card-section>
         <q-card-section>
-          {{ $t("merchant.balance") }}: {{ merchant.balance || 0 }}
+          {{ $t("merchant.balance") }}: {{ (merchant.balance || 0) / 100 }}
         </q-card-section>
         <q-card-section>
-          {{ $t("merchant.totalIncome") }}: {{ merchant.totalIncome || 0 }}
+          {{ $t("merchant.totalIncome") }}: {{ (merchant.totalIncome || 0) / 100 }}
         </q-card-section>
-        <q-card-section>
+        <!-- <q-card-section>
           {{ $t("merchant.totalRealPayout") }}: {{ merchant.totalRealPayout || 0 }}
-        </q-card-section>
+        </q-card-section> -->
       </q-card>
     </div>
   </q-page>
