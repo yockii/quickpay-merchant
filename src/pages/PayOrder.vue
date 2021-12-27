@@ -8,8 +8,6 @@
     <div class="items-start q-gutter-md row">
       <q-input v-model="condition.id" :label="$t('order.id')" />
       <q-input v-model="condition.tradeId" :label="$t('order.tradeId')" />
-      <q-input v-model="condition.channelCode" :label="$t('order.channelCode')" />
-      <q-input v-model="condition.merchantName" :label="$t('order.merchantName')" />
       <!-- <q-space /> -->
       <q-btn class="self-end" icon="search" @click="getData({ pagination })">
         <q-tooltip>{{ $t("search") }}</q-tooltip>
