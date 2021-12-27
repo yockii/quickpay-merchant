@@ -100,5 +100,6 @@ export default {
     status01: 'Verify Failed',
     status02: 'Pay Failed',
     status03: 'Reversed',
+    status04: 'Pay Failed',
   },
 }

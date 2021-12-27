@@ -97,5 +97,6 @@ export default {
     status01: '验证失败',
     status02: '支付失败',
     status03: '已撤销',
+    status04: '支付失败',
   },
 }
