@@ -8,7 +8,7 @@
           {{ $t("siteTitle") }}
         </q-toolbar-title>
 
-        <div>{{ username }}</div>
+        <div>{{ $t("merchant.balance") }}: {{ balance / 100 }} | {{ username }}</div>
       </q-toolbar>
     </q-header>
 
@@ -29,9 +29,10 @@
 <script>
 import EssentialLink from "components/EssentialLink.vue";
 
-import { defineComponent, ref, computed } from "vue";
+import { defineComponent, ref, computed, onMounted } from "vue";
 import { useStore } from "vuex";
 import { useI18n } from "vue-i18n";
+import { merchant as merchantApi } from "../api/merchant";
 
 export default defineComponent({
   name: "MainLayout",
@@ -71,7 +72,19 @@ export default defineComponent({
     const username = computed(() => {
       return $store.state.user.user.username;
     });
+
+    const balance = computed(() => {
+      return $store.state.merchant.balance;
+    });
+
+    onMounted(async () => {
+      const m = await merchantApi.get();
+      if (m.code === 0) {
+        await $store.dispatch("merchant/setBalance", m.data.balance);
+      }
+    });
     return {
+      balance,
       username,
       essentialLinks: linksList,
       leftDrawerOpen,
