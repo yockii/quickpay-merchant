@@ -190,6 +190,13 @@ export default defineComponent({
         format: (val) => (val ? `${val / 100}` : "0.00"),
       },
       {
+        name: "remark",
+        label: $t("order.remark"),
+        align: "left",
+        field: (row) => row.remark,
+        format: (val) => val,
+      },
+      {
         name: "createTime",
         label: $t("order.createTime"),
         align: "center",

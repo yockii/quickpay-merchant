@@ -64,6 +64,15 @@
             >
               <q-tooltip>{{ $t("showDetail") }}</q-tooltip>
             </q-btn>
+            <q-btn
+              v-if="props.row.status >= 6"
+              flat
+              color="primary"
+              round
+              icon="credit_score"
+              @click="showProof(props.row)"
+            >
+            </q-btn>
           </q-td>
         </q-tr>
       </template>
@@ -179,15 +188,28 @@
       </q-card-actions>
     </q-card>
   </q-dialog>
+
+  <q-dialog v-model="dialogProof">
+    <payout-proof
+      :accountNumber="instance.accountNumber"
+      :bankCode="instance.bankCode"
+      :amount="instance.amount"
+      :utr="instance.urt"
+      :createTime="instance.createTime"
+      :id="instance.id"
+    />
+  </q-dialog>
 </template>
 
 <script>
 import { defineComponent, ref, onMounted } from "vue";
 import { payoutOrder } from "../api/payoutOrder";
+import PayoutProof from "src/components/PayoutProof.vue";
 import { useI18n } from "vue-i18n";
 import { useQuasar } from "quasar";
 export default defineComponent({
   name: "PagePayoutOrder",
+  components: { PayoutProof },
   setup() {
     const { t: $t } = useI18n();
     const $q = useQuasar();
@@ -212,7 +234,7 @@ export default defineComponent({
         label: "UTR",
         align: "center",
         field: (row) => row.urt,
-        format: (val) => val || '',
+        format: (val) => val || "",
       },
       {
         name: "amount",
@@ -227,6 +249,13 @@ export default defineComponent({
         align: "center",
         field: (row) => row.fee,
         format: (val) => (val ? `${val / 100}` : "0.00"),
+      },
+      {
+        name: "remark",
+        label: $t("payoutOrder.remark"),
+        align: "left",
+        field: (row) => row.remark,
+        format: (val) => val,
       },
       {
         name: "createTime",
@@ -304,6 +333,12 @@ export default defineComponent({
       dialogInfo.value = true;
     }
 
+    const dialogProof = ref(false);
+    function showProof(row) {
+      setInstance(row);
+      dialogProof.value = true;
+    }
+
     onMounted(() => {
       getData({ pagination: pagination.value });
     });
@@ -317,6 +352,8 @@ export default defineComponent({
       getData,
       dialogInfo,
       openInfoDialog,
+      dialogProof,
+      showProof,
     };
   },
 });
