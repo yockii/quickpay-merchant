@@ -207,7 +207,9 @@ import { payoutOrder } from "../api/payoutOrder";
 import PayoutProof from "src/components/PayoutProof.vue";
 import { useI18n } from "vue-i18n";
 import { useQuasar } from "quasar";
+import PayoutProof from "src/components/PayoutProof.vue";
 export default defineComponent({
+  components: { PayoutProof },
   name: "PagePayoutOrder",
   components: { PayoutProof },
   setup() {

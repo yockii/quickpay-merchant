@@ -25,12 +25,14 @@ import { defineComponent, onMounted, ref } from "vue";
 import { merchant as merchantApi } from "../api/merchant";
 import { useQuasar } from "quasar";
 import { useI18n } from "vue-i18n";
+import { useStore } from "vuex";
 
 export default defineComponent({
   name: "PageIndex",
   setup() {
     const { t: $t } = useI18n();
     const $q = useQuasar();
+    const $store = useStore();
 
     const merchant = ref({});
     onMounted(async () => {

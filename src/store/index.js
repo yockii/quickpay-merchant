@@ -2,6 +2,7 @@ import { store } from 'quasar/wrappers'
 import { createStore } from 'vuex'
 import createPersistedState from "vuex-persistedstate";
 import user from './user'
+import merchant from './merchant'
 
 // import example from './module-example'
 
@@ -17,7 +18,8 @@ import user from './user'
 export default store(function (/* { ssrContext } */) {
   const Store = createStore({
     modules: {
-      user
+      user,
+      merchant
     },
     plugins: [createPersistedState({ storage: window.sessionStorage })],
 
