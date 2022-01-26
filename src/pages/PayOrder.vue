@@ -8,6 +8,7 @@
     <div class="items-start q-gutter-md row">
       <q-input v-model="condition.id" :label="$t('order.id')" />
       <q-input v-model="condition.tradeId" :label="$t('order.tradeId')" />
+      <q-input v-model="condition.remark" :label="$t('order.remark')" />
       <!-- <q-space /> -->
       <q-btn class="self-end" icon="search" @click="getData({ pagination })">
         <q-tooltip>{{ $t("search") }}</q-tooltip>
@@ -228,6 +229,7 @@ export default defineComponent({
     const condition = ref({
       id: "",
       tradeId: "",
+      remark: "",
     });
     const instance = ref({
       id: "",
@@ -259,6 +261,7 @@ export default defineComponent({
           limit: rowsPerPage,
           id: condition.value.id,
           tradeId: condition.value.tradeId,
+          remark: condition.value.remark,
         });
         if (resp.code === 0) {
           rows.value = resp.data.items || [];
