@@ -8,6 +8,7 @@
     <div class="items-start q-gutter-md row">
       <q-input v-model="condition.id" :label="$t('payoutOrder.id')" />
       <q-input v-model="condition.tradeId" :label="$t('payoutOrder.tradeId')" />
+      <q-input v-model="condition.remark" :label="$t('payoutOrder.remark')" />
       <q-select
         v-model="condition.status"
         :label="$t('payoutOrder.status')"
@@ -207,7 +208,6 @@ import { payoutOrder } from "../api/payoutOrder";
 import PayoutProof from "src/components/PayoutProof.vue";
 import { useI18n } from "vue-i18n";
 import { useQuasar } from "quasar";
-import PayoutProof from "src/components/PayoutProof.vue";
 export default defineComponent({
   components: { PayoutProof },
   name: "PagePayoutOrder",
@@ -277,6 +277,7 @@ export default defineComponent({
     const condition = ref({
       id: "",
       tradeId: "",
+      remark: "",
       status: 0,
     });
     const instance = ref({
@@ -313,6 +314,7 @@ export default defineComponent({
           limit: rowsPerPage,
           id: condition.value.id,
           tradeId: condition.value.tradeId,
+          remark: condition.value.remark,
           status: condition.value.status,
         });
         if (resp.code === 0) {
