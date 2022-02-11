@@ -8,7 +8,7 @@
     <div class="items-start q-gutter-md row">
       <q-input v-model="condition.id" :label="$t('order.id')" />
       <q-input v-model="condition.tradeId" :label="$t('order.tradeId')" />
-      <q-input v-model="condition.remark" :label="$t('order.remark')" />
+      <q-input v-model="condition.utr" label="UTR" />
       <!-- <q-space /> -->
       <q-btn class="self-end" icon="search" @click="getData({ pagination })">
         <q-tooltip>{{ $t("search") }}</q-tooltip>
@@ -124,6 +124,15 @@
             </q-field>
           </div>
           <div class="col-6">
+            <q-field label="UTR" stack-label>
+              <template v-slot:control>
+                <div class="self-center full-width no-outline" tabindex="0">
+                  {{ instance.utr }}
+                </div>
+              </template>
+            </q-field>
+          </div>
+          <div class="col-6">
             <q-field :label="$t('order.state')" stack-label>
               <template v-slot:control>
                 <div class="self-center full-width no-outline" tabindex="0">
@@ -191,6 +200,13 @@ export default defineComponent({
         format: (val) => (val ? `${val / 100}` : "0.00"),
       },
       {
+        name: "utr",
+        label: "UTR",
+        align: "left",
+        field: (row) => row.utr,
+        format: (val) => val,
+      },
+      {
         name: "remark",
         label: $t("order.remark"),
         align: "left",
@@ -229,7 +245,7 @@ export default defineComponent({
     const condition = ref({
       id: "",
       tradeId: "",
-      remark: "",
+      utr: "",
     });
     const instance = ref({
       id: "",
@@ -238,6 +254,7 @@ export default defineComponent({
       fee: 0,
       payUser: "",
       remark: "",
+      utr: "",
       payerName: "",
       payerMobile: "",
       payerVirtualAddress: "",
@@ -261,7 +278,7 @@ export default defineComponent({
           limit: rowsPerPage,
           id: condition.value.id,
           tradeId: condition.value.tradeId,
-          remark: condition.value.remark,
+          utr: condition.value.utr,
         });
         if (resp.code === 0) {
           rows.value = resp.data.items || [];
